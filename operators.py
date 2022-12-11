@@ -1,6 +1,9 @@
 from GLOBAL import HEAP
 from stack import stack,op
 
+def nop(s):
+    pass
+
 def prh(s):
     print(s[-1])
 
@@ -38,7 +41,7 @@ def grv(s):
     s.kill()
     for x in a:
         if isinstance(x,op):
-            s.add(op(x.func,max(x.df-1,0)))
+            s.add(op(x.func,x.token,df=max(x.df-1,0)))
             continue
         s.add(x)
 
@@ -50,8 +53,8 @@ def ech(s):
         ss=stack()
         ss.add(x)
         ss.add(bx)
-        ss.add(op(frh))
-        ss.add(op(grv))
+        ss.add(op(frh,"<"))
+        ss.add(op(grv,"¬"))
         out.extend(ss.stack())
     s.kill()
     s.add(out,extend=True)
@@ -70,10 +73,11 @@ def scn(s):
         out.append(x)
         out.extend(contents)
     s.add(out,extend=True)
-    s.add(op(grv))
+    s.add(op(grv,"¬"))
 
 def upck(s):
-    s.add(s.pop(),extend=True)
+    e=s.pop()
+    s.add(e,extend=isinstance(e,list))
 
 def pck(s):
     a=s.stack()
@@ -109,6 +113,17 @@ def grp(s):
         cur.append(i)
     s.add(cur)
 
+def srt(s):
+    s.add(sorted(s.pop()))
+
+def tak(s):
+    n=s.pop()
+    v=s.pop()[::-1]
+    s.add(v[:n])
+
+def islst(s):
+    s.add(1 if isinstance(s.pop(),list) else 0)
+
 ops={
     ".":prh,
     ";":prs,
@@ -128,5 +143,9 @@ ops={
     "!":til,
     "^":grp,
     "1:":read,
+    "^.":srt,
+    "#":tak,
+    "?.":islst,
+    "£":nop
 }
 

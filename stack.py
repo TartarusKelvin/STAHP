@@ -31,6 +31,11 @@ class stack():
         return self.items[-1]
     
 class op():
-    def __init__(self,func,df=0) -> None:
+    def __init__(self,func,token,df=0) -> None:
         self.func = func
         self.df=df
+        self.token=token
+
+    def __repr__(self):
+        d="".join(["`" for x in range(self.df)])
+        return d+self.token
