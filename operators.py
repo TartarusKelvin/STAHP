@@ -16,6 +16,12 @@ def add(s):
 def mul(s):
     s.add(s.pop()*s.pop())
 
+def lss(s):
+    s.add(min([s.pop(),s.pop()]))
+
+def grt(s):
+    s.add(max([s.pop(),s.pop()]))
+
 def drp(s):
     s.pop()
 
@@ -66,17 +72,61 @@ def scn(s):
     s.add(out,extend=True)
     s.add(op(grv))
 
+def upck(s):
+    s.add(s.pop(),extend=True)
+
+def pck(s):
+    a=s.stack()
+    s.kill()
+    s.add(a)
+
+def til(s):
+    s.add(list(range(s.pop())))
+
+
+def read(s):
+    file=s.pop()
+    l = []
+    with open(file,"r") as f:
+        for line in f.readlines():
+            line=line.strip()
+            try:
+                l.append(int(line))
+            except:
+                l.append(line)
+    s.add(l[::-1],extend=True)
+
+def grp(s):
+    cur=[]
+    br=s.pop()
+    a=s.stack()
+    s.kill()
+    for i in a:
+        if i == br:
+            s.add(cur)
+            cur=[]
+            continue
+        cur.append(i)
+    s.add(cur)
+
 ops={
-    ".": prh,
+    ".":prh,
     ";":prs,
     "\\\\": stp,
     "+":add,
     "*":mul,
+    "|":grt,
+    "&":lss,
     "_":drp,
     ">":toh,
     "<":frh,
     "¬":grv,
     "'":ech,
-    "/":scn
+    "/":scn,
+    ".":upck,
+    ",":pck,
+    "!":til,
+    "^":grp,
+    "1:":read,
 }
 

@@ -15,22 +15,34 @@ use > and < to box and unbox data. E.g > vara 1 2 3 will create a variable vara 
 
 # Operators
 
-- "." print the top of the stack
-- ";" print the entire stack
-- "\\\\" exit
-- "+" add the top two numbers of the stack
-- "*" multiply the top two numbers of the stack
-- "_" remove the top element from the stack
-- ">" box
-- "<" unbox
-- "¬" replay the stack removing one layer of deffered. (i.e ¬ `+ 1 2 will result in 3)
-- "'" unbox the top element in the stack infront of each element and apply ¬
-- "/" same as above except does not unbox for the last element
+- . print the top of the stack
+- ; print the entire stack
+- \\\\ exit
+- + add the top two numbers of the stack
+- * multiply the top two numbers of the stack
+- _ remove the top element from the stack
+- > box
+- < unbox
+- ¬ replay the stack removing one layer of deffered. (i.e ¬ `+ 1 2 will result in 3)
+- ' unbox the top element in the stack infront of each element and apply ¬
+- / same as above except does not unbox for the last element
+- , pack the current stack into one list 
+- . unpack the top list into a series of elements
+- ^ delimit the stack by the top element putting each group in a list
+- 1: read in the top element as a file
+- ! creates a list contianing 0 up to the top element of the stack
+- | puts the maximum of the top two elements on the stack
+- & puts the minimum of the top two elements on the stack
 
 # Example Programs
 
 ## Calculating 5 Factorial
 To calculate factorial we can simply use / `* 1 2 3 4 5
+
+## AOC Day 1 2022
+We can solve the fist problem in the advent of code in stahp as a one liner:
+
+/ `| ' s 1: d1 > s `/ ``+ `.
 
 ## Defining Custom functions
 You can add your function to the stack using defered then box into a function name. If you then want to call the function then unbox the function and call ¬
