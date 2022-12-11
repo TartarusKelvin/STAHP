@@ -18,10 +18,10 @@ use > and < to box and unbox data. E.g > vara 1 2 3 will create a variable vara 
 - . print the top of the stack
 - ; print the entire stack
 - \\\\ exit
-- + add the top two numbers of the stack
-- * multiply the top two numbers of the stack
+- \+ add the top two numbers of the stack
+- \* multiply the top two numbers of the stack
 - _ remove the top element from the stack
-- > box
+- \> box
 - < unbox
 - ¬ replay the stack removing one layer of deffered. (i.e ¬ `+ 1 2 will result in 3)
 - ' unbox the top element in the stack infront of each element and apply ¬
@@ -42,7 +42,7 @@ To calculate factorial we can simply use / `* 1 2 3 4 5
 ## AOC Day 1 2022
 We can solve the fist problem in the advent of code in stahp as a one liner:
 
-/ `| ' s 1: d1 > s `/ ``+ `.
+/ \`| ' s 1: d1 > s \`/ \`\`+ \`.
 
 ## Defining Custom functions
 You can add your function to the stack using defered then box into a function name. If you then want to call the function then unbox the function and call ¬
