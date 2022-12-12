@@ -22,6 +22,12 @@ def mul(s):
 def div(s):
     s.add(s.pop()/s.pop())
 
+def equ(s):
+    s.add(s.pop()==s.pop())
+
+def nt(s):
+    s.add(not s.pop())
+
 def lss(s):
     s.add(min([s.pop(),s.pop()]))
 
@@ -157,6 +163,8 @@ ops={
     "+":add,
     "*":mul,
     "%":div,
+    "=":equ,
+    "~":nt,
     "|":grt,
     "|.":rev,
     "&":lss,
