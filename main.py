@@ -23,7 +23,7 @@ def readtoken(t):
         STACK.add(t)
 
 def loadfile(fpath):
-    with open(fpath,"r") as f:
+    with open(fpath,"r",encoding="utf-8") as f:
         for line in f:
             tokens=line.strip().split(" ")[::-1]
             for t in tokens:

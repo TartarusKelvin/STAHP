@@ -1,6 +1,7 @@
 class stack():
     def __init__(self) -> None:
         self.items=[]
+        self.locale=[]
 
     def pop(self):
         return self.items.pop()
@@ -29,6 +30,12 @@ class stack():
         if self.count() == 0:
             return None
         return self.items[-1]
+    
+    def depth(self,x):
+        if x == 1:
+            self.locale.append({})
+            return
+        self.locale.pop()
     
 class op():
     def __init__(self,func,token,df=0) -> None:

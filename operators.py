@@ -19,6 +19,9 @@ def add(s):
 def mul(s):
     s.add(s.pop()*s.pop())
 
+def div(s):
+    s.add(s.pop()/s.pop())
+
 def lss(s):
     s.add(min([s.pop(),s.pop()]))
 
@@ -29,11 +32,22 @@ def drp(s):
     s.pop()
 
 def toh(s):
-    HEAP[s.pop()]=s.stack()
+    if len(s.locale)== 0:
+        HEAP[s.pop()]=s.stack()
+    else:
+        s.locale[-1][s.pop()]=s.stack()
     s.kill()
 
 def frh(s):
-    s.add(HEAP[s.pop()],extend=True)
+    if len(s.locale) == 0:
+        s.add(HEAP[s.pop()],extend=True)
+        return
+    h=s.pop()
+    if isinstance(h,str) and h[0]==".":
+        s.add(HEAP[h[1:]],extend=True)
+        return
+    s.add(s.locale[-1][h],extend=True)
+    
 
 def grv(s):
     # replay stack removing a single layer of deffered
@@ -124,13 +138,27 @@ def tak(s):
 def islst(s):
     s.add(1 if isinstance(s.pop(),list) else 0)
 
+def count(s):
+    s.add(len(s.pop()))
+
+def rev(s):
+    s.add(s.pop()[::-1])
+
+def incdepth(s):
+    s.depth(1)
+
+def decdepth(s):
+    s.depth(-1)
+
 ops={
     ".":prh,
     ";":prs,
     "\\\\": stp,
     "+":add,
     "*":mul,
+    "%":div,
     "|":grt,
+    "|.":rev,
     "&":lss,
     "_":drp,
     ">":toh,
@@ -145,7 +173,10 @@ ops={
     "1:":read,
     "^.":srt,
     "#":tak,
+    "#.":count,
     "?.":islst,
-    "£":nop
+    "£":nop,
+    ")":incdepth,
+    "(":decdepth
 }
 
