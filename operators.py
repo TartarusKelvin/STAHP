@@ -44,6 +44,13 @@ def toh(s):
         s.locale[-1][s.pop()]=s.stack()
     s.kill()
 
+def popin(s):
+    addr=s.pop()
+    if len(s.locale) == 0:
+        HEAP[addr]=[s.pop()]
+    else:
+        s.locale[-1][addr]=[s.pop()]
+
 def frh(s):
     if len(s.locale) == 0:
         s.add(HEAP[s.pop()],extend=True)
@@ -158,6 +165,7 @@ def decdepth(s):
 
 ops={
     ".":prh,
+    ">.":popin,
     ";":prs,
     "\\\\": stp,
     "+":add,
